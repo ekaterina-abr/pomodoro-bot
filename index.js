@@ -77,19 +77,30 @@ bot.help((ctx) => {
 bot.command('starttimer', (ctx) => { 
     let input = ctx.message.text;
     let inputArray = input.split(' ');
+    let isArgCorrect = 1;
     
     if (inputArray.length > 1) time = parseInt(inputArray[1]);
     if (inputArray.length > 2) restTime = parseInt(inputArray[2]);
     if (inputArray.length > 3) longBreakTime = parseInt(inputArray[3]);
     if (inputArray.length > 4) breakSession = parseInt(inputArray[4]) * 2 - 1;
-    ctx.reply('You started the timer for ' + time + ' minutes followed by a ' + restTime + ' minutes break');
-    time *= 60 * 1000; //number of milliseconds
-    restTime *= 60 * 1000;
-    longBreakTime *= 60 * 1000;
-    start = Date.now();
+    if (inputArray.length > 1) {
+        for (let j = 1; j < inputArray.length; j++) {
+            if (!Number.isInteger(+inputArray[j])) {
+                ctx.reply('Arguments should be integer numbers');
+                isArgCorrect = 0;
+                break;
+            }
+        }
+    }
+    if (isArgCorrect == 1) {
+        ctx.reply('You started the timer for ' + time + ' minutes followed by a ' + restTime + ' minutes break');
+        time *= 60 * 1000; //number of milliseconds
+        restTime *= 60 * 1000;
+        longBreakTime *= 60 * 1000;
+        start = Date.now();
 
-    timerId = setInterval(intervalHandler, 1000, ctx, time, restTime);   
-    
+        timerId = setInterval(intervalHandler, 1000, ctx, time, restTime);   
+    }
 })
 
 bot.command('stoptimer', (ctx) => {
