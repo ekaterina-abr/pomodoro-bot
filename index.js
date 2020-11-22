@@ -1,5 +1,7 @@
 const Telegraf = require('telegraf');
-const bot = new Telegraf('1038901632:AAHIpqpYQRqKVXXmFoiB30iXIbGKVzW-PiM');
+const token = require('./config');
+
+const bot = new Telegraf(token);
 const session = require('telegraf/session');
 
 const helpMessage = `
@@ -78,7 +80,7 @@ bot.command('starttimer', (ctx) => {
     let input = ctx.message.text;
     let inputArray = input.split(' ');
     let isArgCorrect = 1;
-    
+
     if (inputArray.length > 1) time = parseInt(inputArray[1]);
     if (inputArray.length > 2) restTime = parseInt(inputArray[2]);
     if (inputArray.length > 3) longBreakTime = parseInt(inputArray[3]);
@@ -92,14 +94,18 @@ bot.command('starttimer', (ctx) => {
             }
         }
     }
+    
+    let time_ = time;
+    let restTime_ = restTime;
+    
     if (isArgCorrect == 1) {
         ctx.reply('You started the timer for ' + time + ' minutes followed by a ' + restTime + ' minutes break');
-        time *= 60 * 1000; //number of milliseconds
-        restTime *= 60 * 1000;
+        time_ *= 60 * 1000; //number of milliseconds
+        restTime_ *= 60 * 1000;
         longBreakTime *= 60 * 1000;
         start = Date.now();
 
-        timerId = setInterval(intervalHandler, 1000, ctx, time, restTime);   
+        timerId = setInterval(intervalHandler, 1000, ctx, time_, restTime_);   
     }
 })
 
