@@ -1,8 +1,10 @@
 const Telegraf = require('telegraf');
-const token = require('./config');
+const info = require('./config');
 
-const bot = new Telegraf(token);
+const bot = new Telegraf(info.TOKEN);
 const session = require('telegraf/session');
+
+module.exports = bot;
 
 const helpMessage = `
 /start - start the bot
