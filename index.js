@@ -1,5 +1,5 @@
 const Telegraf = require('telegraf');
-const info = require('./config');
+const info = ${{ secrets.INFO }}
 
 const bot = new Telegraf(info.TOKEN);
 const session = require('telegraf/session');
