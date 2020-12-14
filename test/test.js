@@ -1,4 +1,4 @@
-const info = require('../config');
+const info = ${{ secrets.INFO }}
 const bot = require('../index');
 
 test('Create and launch bot test', () => {
