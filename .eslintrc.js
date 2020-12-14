@@ -4,7 +4,8 @@ module.exports = {
         "es2021": true,
         "jest": true,
         "node": true,
-	"amd": true
+	"amd": true,
+	"es6": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
