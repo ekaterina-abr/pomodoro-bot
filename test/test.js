@@ -1,5 +1,4 @@
-//const info = require('../config');
-import {info} from "../config";
+const info = require('../config');
 const bot = require('../index');
 
 test('Create and launch bot test', () => {
