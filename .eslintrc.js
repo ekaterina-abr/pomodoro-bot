@@ -10,4 +10,8 @@ module.exports = {
     },
     "rules": {
     }
+    "globals": {
+        "test": "readonly",
+        "expect": "readonly"
+    }
 };
